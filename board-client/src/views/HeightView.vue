@@ -4,7 +4,7 @@ import { resolveComponent } from '@vue/runtime-core'
 
 export default {
   data(){
-    axios.get("http://localhost:3000/photos/height")
+    axios.get("http://211.42.153.225:3000/photos/height")
     .then((response)=>{
       this.a = response.data
       })
@@ -17,7 +17,7 @@ export default {
   },
   methods:{
     imgClick(image_src){
-      window.open("http://localhost:3000/photo?src="+image_src)
+      window.open("http://211.42.153.225:3000/photo?src="+image_src)
     }
   }
 }
@@ -25,7 +25,7 @@ export default {
 <template>  
   <div class="main">
     <div class="image" v-for="i in a" :key="i">
-      <img :src="'http://localhost:3000/photo?src='+i.image_src" @click="imgClick(i.image_src)">
+      <img :src="'http://211.42.153.225:3000/photo?src='+i.image_src" @click="imgClick(i.image_src)">
       <p>{{i.upload_date}} | {{i.location}}</p>
     </div>
   </div>

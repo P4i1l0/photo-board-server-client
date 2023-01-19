@@ -16,9 +16,9 @@ const upload = multer({
     }),
 })
 const connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '21771126!',
+  host     : '211.42.153.225',
+  user     : process.env.MYSQL_USER,
+  password : process.env.MYSQL_PASSWORD,
   database : 'board-api'
 });
 connection.connect();
@@ -84,4 +84,6 @@ app.get('/photos/:type', (req, res) => {
     }
 })
 
-app.listen(3000)
+app.listen(3000, ()=>{
+    console.log('server is running')
+})

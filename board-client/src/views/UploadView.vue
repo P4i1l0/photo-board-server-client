@@ -16,6 +16,10 @@
       <input multiple @change="onInputImage()" ref="serveyImage" type="file" class="image" id="file">
     </div>
     <button class="send-button" @click="onClickFormButton()">Upload</button>
+    <div class="loadingBox" v-if="isLoading">
+      <div class="dim"></div>
+      <div class="circle"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -29,7 +33,8 @@ export default {
         password: '',
         myFile: ''
       },
-      source: "경로"
+      source: "경로",
+      isLoading: false
     }
   },
   methods:{
@@ -52,13 +57,19 @@ export default {
         alert('파일을 선택해주세요.')
         return
       }
-      axios.post('http://localhost:3000/upload', formData)
+      // progress bar
+      this.isLoading = true
+      axios.post('http://211.42.153.225:3000/upload', formData)
       .then((response)=>{
-        console.log(response)
-        alert('업로드 성공')
+        this.isLoading = false
+        this.input.loc = ''
+        this.input.type = ''
+        this.input.password = ''
+        this.input.myFile = ''
       })
       .catch((err)=>{
         alert('업로드 실패')
+        this.isLoading = false
       })
     }
   }
@@ -169,4 +180,20 @@ export default {
     font-size: 20px;
     line-height: 40px;
   }
+  .loadingBox .dim {position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,.7);}
+.loadingBox .circle {position:fixed; left:50%; top:50%; transform:translate(-50%, -50%); width:40px; height:40px; border:10px solid #fff; border-top:10px solid red; border-radius:50em; transition:all .2s;
+    animation-name:spinCircle;
+    animation-duration:.8s;
+    animation-iteration-count:infinite;
+    animation-timing-function:linear;
+}
+
+@keyframes spinCircle {
+    from {
+        transform:translate(-50%, -50%) rotate(0);
+    }
+    to {
+        transform:translate(-50%, -50%) rotate(360deg);
+    }
+}
 </style>
