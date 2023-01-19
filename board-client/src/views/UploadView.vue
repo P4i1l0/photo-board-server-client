@@ -31,7 +31,7 @@ export default {
         loc: '',
         type: '',
         password: '',
-        myFile: ''
+        myFile: '',
       },
       source: "경로",
       isLoading: false
@@ -47,6 +47,7 @@ export default {
       formData.append('loc', this.input.loc)
       formData.append('type', this.input.type)
       formData.append('password', this.input.password)
+      formData.append('date', new Date().toString())
       for(let i = 0; i < this.input.myFile.length; i++){
         formData.append('myFile', this.input.myFile[i])
       }
@@ -59,7 +60,7 @@ export default {
       }
       // progress bar
       this.isLoading = true
-      axios.post('http://211.42.153.225:3000/upload', formData)
+      axios.post('http://localhost:3000/upload', formData)
       .then((response)=>{
         this.isLoading = false
         this.input.loc = ''

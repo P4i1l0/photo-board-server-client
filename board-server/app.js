@@ -33,7 +33,7 @@ app.get('/photo', (req, res) => {
 app.post('/upload', upload.single('myFile'), (req, res) => {
     const fileName = req.file.filename
     const type = req.body.type
-    const date = new Date().toString()
+    const date = req.body.date
     const location = req.body.loc
     const password = req.body.password
     if (password == "21771126!"){
