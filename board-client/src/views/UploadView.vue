@@ -60,7 +60,7 @@ export default {
       }
       // progress bar
       this.isLoading = true
-      axios.post('http://localhost:3000/upload', formData)
+      axios.post('http://211.42.153.225:3000/upload', formData)
       .then((response)=>{
         this.isLoading = false
         this.input.loc = ''
@@ -69,8 +69,9 @@ export default {
         this.input.myFile = ''
       })
       .catch((err)=>{
-        alert('업로드 실패')
         this.isLoading = false
+        console.log(err)
+        alert('업로드 실패')
       })
     }
   }
